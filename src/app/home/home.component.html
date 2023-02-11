@@ -1,7 +1,128 @@
-<div class="container">
-  <h1 class="title">
-    {{ 'PAGES.HOME.TITLE' | translate }}
-  </h1>
+<div class="main" [@modeTrigger]="mode">
+  <div class="container">
+    <div class="d-flex justify-content-between align-items-center py-2 px-3 text-white border-bottom border-dark">
+      <h3>Fishfocus</h3>
+      <div>
+        <button type="button" (click)="openSettingModal(settingContent)" class="btn btn-outline-light">
+          <i class="bi bi-gear-fill me-2"></i>
+          <span>Setting</span>
+        </button>
+      </div>
+    </div>
+    <div class="row-container mt-5">
 
-  <a routerLink="/detail">{{ 'PAGES.HOME.GO_TO_DETAIL' | translate }}</a>
+      <div class="timer-box pt-3 pb-4">
+        <div class="d-flex justify-content-center">
+          <div class="timer-header-item" [class.timer-header-item-active]="mode==='focus'"
+            (click)="changeMode('focus')">Focus</div>
+          <div class="timer-header-item" [class.timer-header-item-active]="mode==='shortBreak'"
+            (click)="changeMode('shortBreak')">Short Break</div>
+          <div class="timer-header-item" [class.timer-header-item-active]="mode==='longBreak'"
+            (click)="changeMode('longBreak')">Long Break</div>
+        </div>
+        <div class="fw-bold mt-3 text-white text-center timer-number">
+          <!-- <countdown #cd [config]="{ leftTime: modeNumber, format: 'mm:ss',demand:true }"></countdown> -->
+          <countdown #cd [config]="countConfig"></countdown>
+        </div>
+        <ng-container *ngIf="countdownStatus !== 'start' ">
+          <div class="text-center">
+            <button type="button" [style.color]="modeColor" class="btn btn-light timer-button"
+              (click)="startCountdown()">START</button>
+          </div>
+        </ng-container>
+        <ng-container *ngIf="countdownStatus === 'start' ">
+          <div class="text-center">
+            <button type="button" [style.color]="modeColor" class="btn btn-light timer-button"
+              (click)="pauseCountdown()">PAUSE</button>
+          </div>
+        </ng-container>
+      </div>
+    </div>
+    <div class="text-center mt-3 text-white">
+      <h5>Time to focus!</h5>
+    </div>
+    <div class="row-container mt-5">
+      <div class="task-box">
+        <div class="pb-3 text-white border-bottom border-2">
+          <h4>Tasks</h4>
+        </div>
+        <div class="pt-3">
+          <div *ngFor="let item of taskList;let i = index"
+            class="task-item d-flex justify-content-between mb-2 align-items-center py-3 ps-2 pe-3">
+            <div class="w-75 d-flex align-items-center">
+              <div *ngIf="item.status===0" (click)="changeTaskStatus(i,item,1)" class="me-2 fs-4 task-status"><i
+                  class="bi bi-check-circle-fill"></i></div>
+              <div *ngIf="item.status===1" (click)="changeTaskStatus(i,item,0)"
+                class="me-2 fs-4 task-status task-checked"><i class="bi bi-check-circle-fill"></i></div>
+              <div class="task-text" [class.text-complete]="item.status===1">{{item.text}}</div>
+            </div>
+            <div class="d-flex">
+              <button type="button" (click)="openEditTaskModal(content,i,item)" class="btn btn-outline-dark me-2">
+                <i class="bi bi-pencil-fill"></i>
+              </button>
+              <button type="button" (click)="deleteTask(i)" class="btn btn-outline-danger">
+                <i class="bi bi-trash-fill"></i>
+              </button>
+            </div>
+          </div>
+        </div>
+        <div class="mt-3">
+          <button type="button" class="w-100 btn btn-outline-light" (click)="openAddTaskModal(content)">
+            <h4>Add Task</h4>
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
 </div>
+
+
+<ng-template #content let-modal>
+  <div class="modal-header">
+    <h4 *ngIf="modalType === 'ADD' " class="modal-title">Add Task</h4>
+    <h4 *ngIf="modalType === 'EDIT' " class="modal-title">Edit Task</h4>
+    <button type="button" class="btn-close" aria-label="Close" (click)="modal.dismiss('')"></button>
+  </div>
+  <div class="modal-body">
+    <div>
+      <input type="text" [(ngModel)]="taskItem.text" class="form-control fs-3 border-0 task-input"
+        placeholder="What are you working on?">
+    </div>
+  </div>
+  <div class="modal-footer">
+    <button type="button" *ngIf="modalType==='ADD'" class="btn btn-outline-dark"
+      (click)="saveAddTaskModal()">Save</button>
+    <button type="button" *ngIf="modalType==='EDIT'" class="btn btn-outline-dark"
+      (click)="saveEditTaskModal()">Save</button>
+  </div>
+</ng-template>
+
+
+<ng-template #settingContent let-modal>
+  <div class="modal-header">
+    <h4 class="modal-title mb-2">Setting</h4>
+    <button type="button" class="btn-close" aria-label="Close" (click)="modal.dismiss('')"></button>
+  </div>
+  <div class="modal-body">
+    <div>
+      <h5>Time (minutes)</h5>
+    </div>
+    <div class="row g-3">
+      <div class="col-4">
+        <label class="form-label text-gray">Focus</label>
+        <input type="number" [(ngModel)]="displaySetting.focus" class="form-control">
+      </div>
+      <div class="col-4">
+        <label class="form-label text-gray">Short Break</label>
+        <input type="number" [(ngModel)]="displaySetting.shortBreak" class="form-control">
+      </div>
+      <div class="col-4">
+        <label class="form-label text-gray">Long Break</label>
+        <input type="number" [(ngModel)]="displaySetting.longBreak" class="form-control">
+      </div>
+    </div>
+  </div>
+  <div class="modal-footer">
+    <button type="button" class="btn btn-dark" (click)="saveSettingModal()">OK</button>
+  </div>
+</ng-template>

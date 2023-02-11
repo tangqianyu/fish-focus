@@ -1,3 +1,84 @@
-:host {
-  
+.main {
+  width: 100%;
+  min-height: 100vh;
+  padding-bottom: 50px;
+  transition: background-color 0.5s ease-in-out;
+}
+
+.bg-focus {
+  background-color: #ba4949;
+}
+
+.row-container {
+  display: flex;
+  justify-content: center;
+}
+
+.timer-box {
+  background-color: rgba(255, 255, 255, 0.1);
+  width: 100%;
+  max-width: 480px;
+  .timer-header-item {
+    cursor: pointer;
+    font-size: 16px;
+    color: #fff;
+    padding: 2px 12px;
+  }
+  .timer-header-item-active {
+    background: none rgba(0, 0, 0, 0.15);
+  }
+
+  .timer-number {
+    font-size: 120px;
+    margin-top: 20px;
+  }
+  .timer-button {
+    width: 200px;
+    font-size: 22px;
+    color: #ba4949;
+  }
+}
+
+.task-box {
+  width: 100%;
+  max-width: 480px;
+}
+
+.task-input::placeholder {
+  font-style: italic;
+}
+
+.task-item {
+  width: 100%;
+  background-color: white;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+.task-checked {
+  color: #ba4949 !important;
+}
+
+.task-status:hover {
+  opacity: 0.6;
+}
+
+.task-status{
+  color: rgb(223, 223, 223);
+}
+
+
+.task-text {
+  overflow-wrap: break-word;
+  width: 85%;
+  line-height: 1.5;
+}
+
+.text-complete{
+  text-decoration: line-through;
+  color: rgb(187, 187, 187);
+}
+
+.text-gray{
+  color: rgb(187, 187, 187);;
 }
