@@ -1,27 +1,36 @@
-import {app, BrowserWindow, screen} from 'electron';
+import {
+  app,
+  BrowserWindow,
+  MenuItemConstructorOptions,
+  Menu,
+  screen,
+} from 'electron';
 import * as path from 'path';
 import * as fs from 'fs';
 
 let win: BrowserWindow = null;
 const args = process.argv.slice(1),
-  serve = args.some(val => val === '--serve');
+  serve = args.some((val) => val === '--serve');
 
 function createWindow(): BrowserWindow {
-
   const size = screen.getPrimaryDisplay().workAreaSize;
+  const template: MenuItemConstructorOptions[] = [];
 
   // Create the browser window.
   win = new BrowserWindow({
-    x: 0,
-    y: 0,
-    width: size.width,
-    height: size.height,
+    width: size.width * 0.8 | 0,
+    height: size.height * 0.8 | 0,
     webPreferences: {
       nodeIntegration: true,
-      allowRunningInsecureContent: (serve),
-      contextIsolation: false,  // false if you want to run e2e test with Spectron
+      allowRunningInsecureContent: serve,
+      contextIsolation: false, // false if you want to run e2e test with Spectron
     },
   });
+
+  win.center();
+
+  const menu = Menu.buildFromTemplate(template);
+  Menu.setApplicationMenu(menu);
 
   if (serve) {
     const debug = require('electron-debug');
@@ -34,7 +43,7 @@ function createWindow(): BrowserWindow {
     let pathIndex = './index.html';
 
     if (fs.existsSync(path.join(__dirname, '../dist/index.html'))) {
-       // Path when running electron in local folder
+      // Path when running electron in local folder
       pathIndex = '../dist/index.html';
     }
 
@@ -76,7 +85,6 @@ try {
       createWindow();
     }
   });
-
 } catch (e) {
   // Catch Error
   // throw e;

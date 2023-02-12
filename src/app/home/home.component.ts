@@ -93,13 +93,19 @@ export class HomeComponent implements OnInit, AfterViewInit {
     this.countdown.event.subscribe((val) => {
       console.log(val);
       this.countdownStatus = val.action;
+      if (val.action === 'done') {
+        this.playSound();
+      }
     });
   }
 
   getSetting() {
     this.setting = this.settingService.getSetting();
     this.modeNumber = this.setting[`${this.mode}`];
-    this.countConfig.leftTime = this.modeNumber;
+    this.countConfig = {
+      ...this.countConfig,
+      leftTime: this.modeNumber,
+    };
     this.displaySetting = {
       focus: this.setting.focus / 60,
       shortBreak: this.setting.shortBreak / 60,
@@ -206,5 +212,12 @@ export class HomeComponent implements OnInit, AfterViewInit {
     };
     this.settingService.changeSetting(setting);
     this.getSetting();
+  }
+
+  playSound() {
+    const audio = new Audio();
+    audio.src = 'assets/media/alarm-kitchen.mp3';
+    audio.load();
+    audio.play();
   }
 }
