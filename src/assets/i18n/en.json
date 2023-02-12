@@ -1,12 +1,22 @@
 {
   "PAGES": {
-      "HOME": {
-          "TITLE": "App works !",
-          "GO_TO_DETAIL": "Go to Detail"
-      },
-      "DETAIL": {
-        "TITLE": "Detail page !",
-        "BACK_TO_HOME": "Back to Home"
+    "HOME": {
+      "TITLE": "Fishfocus",
+      "SETTING": "Setting",
+      "FOCUS": "Focus",
+      "SHORT_BREAK": "Short Break",
+      "LONG_BREAK": "Long Break",
+      "START": "START",
+      "PAUSE": "PAUSE",
+      "FOCUS_TIP": "Time to focus!",
+      "BREAK_TIP": "Time for a break!",
+      "TASK_TITLE": "Tasks",
+      "ADD_TASK": "Add Task",
+      "EDIT_TASK": "Edit Task",
+      "ADD_TASK_PLACEHOLDER": "What are you working on?",
+      "TIME_SETTING": "Time (minutes)",
+      "SAVE": "Save",
+      "LANGUAGE": "Language"
     }
   }
 }

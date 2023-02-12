@@ -16,6 +16,7 @@ import {
 import { TaskItem, TaskService } from '../services/task.service';
 import { SettingService } from '../services/setting.service';
 import { msToTime } from '../utils/common';
+import { TranslateService } from '@ngx-translate/core';
 
 @Component({
   selector: 'app-home',
@@ -81,7 +82,8 @@ export class HomeComponent implements OnInit, AfterViewInit {
     private router: Router,
     private modalService: NgbModal,
     private taskService: TaskService,
-    private settingService: SettingService
+    private settingService: SettingService,
+    private translate: TranslateService,
   ) {}
 
   ngOnInit(): void {
@@ -97,7 +99,7 @@ export class HomeComponent implements OnInit, AfterViewInit {
         this.playSound();
         if (this.mode === 'focus') {
           this.changeMode('shortBreak');
-        }else{
+        } else {
           this.changeMode('focus');
         }
       }
@@ -106,12 +108,14 @@ export class HomeComponent implements OnInit, AfterViewInit {
 
   getSetting() {
     this.setting = this.settingService.getSetting();
+    this.translate.setDefaultLang(this.settingService.getSetting().language);
     this.modeNumber = this.setting[`${this.mode}`];
     this.countConfig = {
       ...this.countConfig,
       leftTime: this.modeNumber,
     };
     this.displaySetting = {
+      ...this.setting,
       focus: this.setting.focus / 60,
       shortBreak: this.setting.shortBreak / 60,
       longBreak: this.setting.longBreak / 60,
@@ -135,7 +139,6 @@ export class HomeComponent implements OnInit, AfterViewInit {
       ...this.countConfig,
       leftTime: this.modeNumber,
     };
-    console.log(this.countConfig);
 
     this.modeColor = this.modeColorList[index];
   }
@@ -211,6 +214,7 @@ export class HomeComponent implements OnInit, AfterViewInit {
 
     this.settingModal.close();
     const setting = {
+      ...this.displaySetting,
       focus: this.displaySetting.focus * 60,
       shortBreak: this.displaySetting.shortBreak * 60,
       longBreak: this.displaySetting.longBreak * 60,

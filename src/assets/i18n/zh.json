@@ -1,0 +1,22 @@
+{
+  "PAGES": {
+    "HOME": {
+      "TITLE": "卷b助手",
+      "SETTING": "设置",
+      "FOCUS": "卷b模式",
+      "SHORT_BREAK": "小憩一下",
+      "LONG_BREAK": "躺平模式",
+      "START": "开始",
+      "PAUSE": "暂停",
+      "FOCUS_TIP": "开启卷b模式！",
+      "BREAK_TIP": "现在可以躺平了！",
+      "TASK_TITLE": "任务",
+      "ADD_TASK": "添加任务",
+      "EDIT_TASK": "编辑任务",
+      "ADD_TASK_PLACEHOLDER": "你在卷什么?",
+      "TIME_SETTING": "时间 （分）",
+      "SAVE": "保存",
+      "LANGUAGE": "语言"
+    }
+  }
+}

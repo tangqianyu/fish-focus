@@ -8,6 +8,7 @@ export class SettingService {
     focus: 1500,
     shortBreak: 300,
     longBreak: 900,
+    language: 'en',
   };
   constructor() {}
 

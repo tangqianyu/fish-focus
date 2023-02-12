@@ -1,11 +1,11 @@
 <div class="main" [@modeTrigger]="mode">
   <div class="container">
     <div class="d-flex justify-content-between align-items-center py-2 px-3 text-white border-bottom border-dark">
-      <h3>Fishfocus</h3>
+      <h3>{{'PAGES.HOME.TITLE'|translate}}</h3>
       <div>
         <button type="button" (click)="openSettingModal(settingContent)" class="btn btn-outline-light">
           <i class="bi bi-gear-fill me-2"></i>
-          <span>Setting</span>
+          <span>{{'PAGES.HOME.SETTING'|translate}}</span>
         </button>
       </div>
     </div>
@@ -14,11 +14,11 @@
       <div class="timer-box pt-3 pb-4">
         <div class="d-flex justify-content-center">
           <div class="timer-header-item" [class.timer-header-item-active]="mode==='focus'"
-            (click)="changeMode('focus')">Focus</div>
+            (click)="changeMode('focus')">{{'PAGES.HOME.FOCUS'|translate}}</div>
           <div class="timer-header-item" [class.timer-header-item-active]="mode==='shortBreak'"
-            (click)="changeMode('shortBreak')">Short Break</div>
+            (click)="changeMode('shortBreak')">{{'PAGES.HOME.SHORT_BREAK'|translate}}</div>
           <div class="timer-header-item" [class.timer-header-item-active]="mode==='longBreak'"
-            (click)="changeMode('longBreak')">Long Break</div>
+            (click)="changeMode('longBreak')">{{'PAGES.HOME.LONG_BREAK'|translate}}</div>
         </div>
         <div class="fw-bold mt-3 text-white text-center timer-number">
           <!-- <countdown #cd [config]="{ leftTime: modeNumber, format: 'mm:ss',demand:true }"></countdown> -->
@@ -27,25 +27,25 @@
         <ng-container *ngIf="countdownStatus !== 'start' ">
           <div class="text-center">
             <button type="button" [style.color]="modeColor" class="btn btn-light timer-button"
-              (click)="startCountdown()">START</button>
+              (click)="startCountdown()">{{'PAGES.HOME.START'|translate}}</button>
           </div>
         </ng-container>
         <ng-container *ngIf="countdownStatus === 'start' ">
           <div class="text-center">
             <button type="button" [style.color]="modeColor" class="btn btn-light timer-button"
-              (click)="pauseCountdown()">PAUSE</button>
+              (click)="pauseCountdown()">{{'PAGES.HOME.PAUSE'|translate}}</button>
           </div>
         </ng-container>
       </div>
     </div>
     <div class="text-center mt-3 text-white">
-      <h5 *ngIf="mode === 'focus'">Time to focus!</h5>
-      <h5 *ngIf="mode !== 'focus'">Time for a break!</h5>
+      <h5 *ngIf="mode === 'focus'">{{'PAGES.HOME.FOCUS_TIP'|translate}}</h5>
+      <h5 *ngIf="mode !== 'focus'">{{'PAGES.HOME.BREAK_TIP'|translate}}</h5>
     </div>
     <div class="row-container mt-5">
       <div class="task-box">
         <div class="pb-3 text-white border-bottom border-2">
-          <h4>Tasks</h4>
+          <h4>{{'PAGES.HOME.TASK_TITLE'|translate}}</h4>
         </div>
         <div class="pt-3">
           <div *ngFor="let item of taskList;let i = index"
@@ -69,7 +69,7 @@
         </div>
         <div class="mt-3">
           <button type="button" class="w-100 btn btn-outline-light" (click)="openAddTaskModal(content)">
-            <h4>Add Task</h4>
+            <h4>{{'PAGES.HOME.ADD_TASK'|translate}}</h4>
           </button>
         </div>
       </div>
@@ -80,47 +80,54 @@
 
 <ng-template #content let-modal>
   <div class="modal-header">
-    <h4 *ngIf="modalType === 'ADD' " class="modal-title">Add Task</h4>
-    <h4 *ngIf="modalType === 'EDIT' " class="modal-title">Edit Task</h4>
+    <h4 *ngIf="modalType === 'ADD' " class="modal-title">{{'PAGES.HOME.ADD_TASK'|translate}}</h4>
+    <h4 *ngIf="modalType === 'EDIT' " class="modal-title">{{'PAGES.HOME.EDIT_TASK'|translate}}</h4>
     <button type="button" class="btn-close" aria-label="Close" (click)="modal.dismiss('')"></button>
   </div>
   <div class="modal-body">
     <div>
       <input type="text" [(ngModel)]="taskItem.text" class="form-control fs-3 border-0 task-input"
-        placeholder="What are you working on?">
+        [placeholder]="'PAGES.HOME.ADD_TASK_PLACEHOLDER'|translate">
     </div>
   </div>
   <div class="modal-footer">
     <button type="button" *ngIf="modalType==='ADD'" class="btn btn-outline-dark"
-      (click)="saveAddTaskModal()">Save</button>
+      (click)="saveAddTaskModal()">{{'PAGES.HOME.SAVE'|translate}}</button>
     <button type="button" *ngIf="modalType==='EDIT'" class="btn btn-outline-dark"
-      (click)="saveEditTaskModal()">Save</button>
+      (click)="saveEditTaskModal()">{{'PAGES.HOME.SAVE'|translate}}</button>
   </div>
 </ng-template>
 
 
 <ng-template #settingContent let-modal>
   <div class="modal-header">
-    <h4 class="modal-title mb-2">Setting</h4>
+    <h4 class="modal-title mb-2">{{'PAGES.HOME.SETTING'|translate}}</h4>
     <button type="button" class="btn-close" aria-label="Close" (click)="modal.dismiss('')"></button>
   </div>
   <div class="modal-body">
     <div>
-      <h5>Time (minutes)</h5>
+      <h5>{{'PAGES.HOME.TIME_SETTING'|translate}}</h5>
     </div>
-    <div class="row g-3">
+    <div class="row g-3 mb-3">
       <div class="col-4">
-        <label class="form-label text-gray">Focus</label>
+        <label class="form-label text-gray">{{'PAGES.HOME.FOCUS'|translate}}</label>
         <input type="number" [(ngModel)]="displaySetting.focus" class="form-control">
       </div>
       <div class="col-4">
-        <label class="form-label text-gray">Short Break</label>
+        <label class="form-label text-gray">{{'PAGES.HOME.SHORT_BREAK'|translate}}</label>
         <input type="number" [(ngModel)]="displaySetting.shortBreak" class="form-control">
       </div>
       <div class="col-4">
-        <label class="form-label text-gray">Long Break</label>
+        <label class="form-label text-gray">{{'PAGES.HOME.LONG_BREAK'|translate}}</label>
         <input type="number" [(ngModel)]="displaySetting.longBreak" class="form-control">
       </div>
+    </div>
+    <div>
+      <label class="form-label">{{'PAGES.HOME.LANGUAGE'|translate}}</label>
+      <select class="form-select" [(ngModel)]="displaySetting.language">
+        <option value="en">English</option>
+        <option value="zh">中文</option>
+      </select>
     </div>
   </div>
   <div class="modal-footer">
