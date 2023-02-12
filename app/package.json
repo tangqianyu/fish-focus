@@ -5,7 +5,7 @@
     "name": "Tang qy",
     "email": "tangqianyu123456@gmail.com"
   },
-  "version": "1.0.0",
+  "version": "2.0.0",
   "main": "main.js",
   "private": true,
   "dependencies": {

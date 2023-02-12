@@ -15,7 +15,7 @@ export class AppComponent {
     private translate: TranslateService,
     private settingService: SettingService
   ) {
-    this.translate.setDefaultLang(this.settingService.getSetting().language);
+    // this.translate.setDefaultLang(this.settingService.getSetting().language);
     console.log('APP_CONFIG', APP_CONFIG);
 
     if (electronService.isElectron) {
