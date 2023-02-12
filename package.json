@@ -1,11 +1,11 @@
 {
-  "name": "angular-electron",
-  "version": "11.2.0",
-  "description": "Angular 14 with Electron 21 (Typescript + SASS + Hot Reload)",
-  "homepage": "https://github.com/maximegris/angular-electron",
+  "name": "fish-focus",
+  "version": "1.0.0",
+  "description": "An app for help you focus on your work and study.",
+  "homepage": "https://github.com/tangqianyu/fish-focus",
   "author": {
-    "name": "Maxime GRIS",
-    "email": "maxime.gris@gmail.com"
+    "name": "Tang qy",
+    "email": "tangqianyu123456@gmail.com"
   },
   "keywords": [
     "angular",
