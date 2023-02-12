@@ -39,7 +39,8 @@
       </div>
     </div>
     <div class="text-center mt-3 text-white">
-      <h5>Time to focus!</h5>
+      <h5 *ngIf="mode === 'focus'">Time to focus!</h5>
+      <h5 *ngIf="mode !== 'focus'">Time for a break!</h5>
     </div>
     <div class="row-container mt-5">
       <div class="task-box">

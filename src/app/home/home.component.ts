@@ -95,6 +95,11 @@ export class HomeComponent implements OnInit, AfterViewInit {
       this.countdownStatus = val.action;
       if (val.action === 'done') {
         this.playSound();
+        if (this.mode === 'focus') {
+          this.changeMode('shortBreak');
+        }else{
+          this.changeMode('focus');
+        }
       }
     });
   }
