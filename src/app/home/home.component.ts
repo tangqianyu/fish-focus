@@ -83,7 +83,7 @@ export class HomeComponent implements OnInit, AfterViewInit {
     private modalService: NgbModal,
     private taskService: TaskService,
     private settingService: SettingService,
-    private translate: TranslateService,
+    private translate: TranslateService
   ) {}
 
   ngOnInit(): void {
@@ -152,6 +152,10 @@ export class HomeComponent implements OnInit, AfterViewInit {
 
   openAddTaskModal(content) {
     this.modalType = 'ADD';
+    this.taskItem = {
+      text: '',
+      status: 0,
+    };
     this.taskModal = this.modalService.open(content);
   }
   saveAddTaskModal() {
